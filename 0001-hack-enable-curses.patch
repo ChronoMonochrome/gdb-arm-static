@@ -1,0 +1,45 @@
+diff --git a/gdb/configure b/gdb/configure
+index 28756ed..2108098 100755
+--- a/gdb/configure
++++ b/gdb/configure
+@@ -8876,7 +8876,7 @@ if test x"$enable_tui" != xno; then
+   prefer_curses=yes
+ fi
+ 
+-curses_found=no
++curses_found=yes
+ if test x"$prefer_curses" = xyes; then
+   # FIXME: kettenis/20040905: We prefer ncurses over the vendor-supplied
+   # curses library because the latter might not provide all the
+@@ -8947,6 +8947,8 @@ fi
+   fi
+ fi
+ 
++curses_found=yes
++
+ # Check whether we should enable the TUI, but only do so if we really
+ # can.
+ if test x"$enable_tui" != xno; then
+-- 
+2.11.0
+
+diff --git a/gdb/stub-termcap.c b/gdb/stub-termcap.c
+index f382823..a27e1b4 100644
+--- a/gdb/stub-termcap.c
++++ b/gdb/stub-termcap.c
+@@ -85,6 +85,7 @@ tgetstr (char *name, char **area)
+   return NULL;
+ }
+ 
++#if 0
+ int
+ tputs (char *string, int nlines, int (*outfun) (int))
+ {
+@@ -93,6 +94,7 @@ tputs (char *string, int nlines, int (*outfun) (int))
+ 
+   return 0;
+ }
++#endif
+ 
+ char *
+ tgoto (const char *cap, int col, int row)

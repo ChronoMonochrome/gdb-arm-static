@@ -1,0 +1,13 @@
+diff --git a/Makefile.orig b/Makefile
+index 9cb01e8..7f87197 100644
+--- a/Makefile.orig
++++ b/Makefile
+@@ -1921,7 +1921,7 @@ gdb$(EXEEXT): gdb.o $(LIBGDB_OBS) $(ADD_DEPS) $(CDEPS) $(TDEPLIBS)
+ 	$(SILENCE) rm -f gdb$(EXEEXT)
+ 	$(ECHO_CXXLD) $(CC_LD) $(INTERNAL_LDFLAGS) $(WIN32LDAPP) \
+ 		-o gdb$(EXEEXT) gdb.o $(LIBGDB_OBS) \
+-		$(TDEPLIBS) $(TUI_LIBRARY) $(CLIBS) $(LOADLIBES)
++		$(TDEPLIBS) $(shell echo $$NCURSES_PREFIX)/lib/libncurses.a $(TUI_LIBRARY) $(CLIBS) $(LOADLIBES)
+ ifneq ($(CODESIGN_CERT),)
+ 	$(ECHO_SIGN) $(CODESIGN) -s $(CODESIGN_CERT) gdb$(EXEEXT)
+ endif
